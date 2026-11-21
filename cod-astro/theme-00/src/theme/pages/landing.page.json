@@ -1,7 +1,7 @@
 {
   "version": 1,
   "surface": "landing",
-  "hiddenAreas": ["header"],
+  "hiddenAreas": ["header", "footer"],
   "sections": [
     { "id": "landing-images", "type": "landing-images" },
     { "id": "landing-order", "type": "landing-order" }
