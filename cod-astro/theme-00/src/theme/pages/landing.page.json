@@ -4,6 +4,7 @@
   "hiddenAreas": ["header", "footer"],
   "sections": [
     { "id": "landing-images", "type": "landing-images" },
+    { "id": "landing-trust-strip", "type": "marquee", "props": {} },
     { "id": "landing-order", "type": "landing-order" }
   ]
 }
