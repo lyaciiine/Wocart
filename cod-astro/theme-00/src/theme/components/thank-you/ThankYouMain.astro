@@ -17,7 +17,7 @@ type Props = Pick<InferProps<typeof thankYouMain>, "showSteps" | "showTrackOrder
 
 const { content, order, showSteps = true, showTrackOrder = true, scheme, style } = Astro.props;
 const store = Astro.locals.store;
-const { config, isRTL } = store;
+const { config } = store;
 const whatsapp = storeWhatsApp(store, { kind: "order", order: order.number, url: canonicalUrl(Astro.url.origin, store, Astro.url.search) });
 const totalFormatted = order.total !== null ? formatAmount(order.total) : null;
 const steps = [
