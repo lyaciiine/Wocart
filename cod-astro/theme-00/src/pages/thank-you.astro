@@ -39,9 +39,6 @@ const pageConfig = { ...config, pixelId: tracking?.pixelId ?? null };
   title={`${content.thankYouPageTitle} — ${config.name}`}
   noindex={true}
   softNavigation={false}
-  header={false}
-  footer={false}
-  hideMobileNav={true}
 >
   <Sections theme={thankYouCatalog} surface="thank-you" document={saved} params={{ orderNumber, total: total === null ? undefined : String(total), surface: "thank-you" }} reads={createReadCache()} />
   <Fragment set:html={conversionTag(tracking, total)} />
