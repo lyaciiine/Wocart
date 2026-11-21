@@ -125,9 +125,9 @@ const turnstileEnabled = config.turnstileEnabled === true && Boolean(config.turn
           {turnstileEnabled && (
             <TurnstileField siteKey={config.turnstileSiteKey!} content={content} />
           )}
-          <div class="mt-5">
+          {/* <div class="mt-5">
             <CouponField content={content} cur={config.currencySymbol} couponRefusal={couponRefusal} />
-          </div>
+          </div> */}
         </div>
 
         <button
