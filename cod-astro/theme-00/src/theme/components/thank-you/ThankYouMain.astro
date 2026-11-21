@@ -17,7 +17,7 @@ type Props = Pick<InferProps<typeof thankYouMain>, "showSteps" | "showTrackOrder
 
 const { content, order, showSteps = true, showTrackOrder = true, scheme, style } = Astro.props;
 const store = Astro.locals.store;
-const { config } = store;
+const { config, isRTL } = store;
 const whatsapp = storeWhatsApp(store, { kind: "order", order: order.number, url: canonicalUrl(Astro.url.origin, store, Astro.url.search) });
 const totalFormatted = order.total !== null ? formatAmount(order.total) : null;
 const steps = [
@@ -112,5 +112,12 @@ const steps = [
         {content.trackTitle}
       </a>
       )}
+      <a
+        href={Astro.locals.store.href("/")}
+        class="btn-primary !h-[3.75rem] !text-[1rem] active:scale-95 shadow-xl shadow-[var(--clr-primary)]/20"
+      >
+        {content.backToStore}
+        <Icon name="heroicons:arrow-right" class:list={["w-5 h-5", isRTL ? 'rotate-180' : '']} />
+      </a>
     </div>
 </Section>
