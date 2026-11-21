@@ -25,7 +25,7 @@ export const landingImages = defineComponent({
     { key: "first", kind: "number", label: FIELD.firstImage, description: HELP.firstImage, default: 1, min: 1, max: 40, step: 1 },
     { key: "count", kind: "number", label: FIELD.imageCount, description: HELP.imageCount, default: 0, min: 0, max: 40, step: 1 },
     schemeField(),
-    styleField({ spacing: { paddingBlockStart: { base: "s0" }, paddingBlockEnd: { base: "s0" } }, size: { width: { base: "narrow" } } }),
+    styleField({ spacing: { paddingBlockStart: { base: "s0" }, paddingBlockEnd: { base: "s0" } }, size: { width: {  base: "full",  md: "narrow"  } } }),
   ],
   load: async (input) => ({ landing: await routeLanding(input) }),
   presets: [
