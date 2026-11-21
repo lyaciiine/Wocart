@@ -30,7 +30,6 @@ export const thankYouMain = defineComponent({
     { key: "step3Title", kind: "text", label: FIELD.stepTitle(3), contentKey: "step3Title", visibleIf: { field: "showSteps", equals: true } },
     { key: "step3Sub", kind: "text", label: FIELD.stepText(3), contentKey: "step3Sub", visibleIf: { field: "showSteps", equals: true } },
     { key: "showTrackOrder", kind: "boolean", label: FIELD.showTrackOrder, default: true },
-    { key: "backToStore", kind: "text", label: FIELD.button, contentKey: "backToStore" },
     schemeField(),
     styleField({ spacing: { paddingBlockStart: { base: "s7", lg: "s9" }, paddingBlockEnd: { base: "s7", lg: "s9" } }, size: { width: { base: "narrow" } } }),
   ],
