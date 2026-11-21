@@ -112,12 +112,5 @@ const steps = [
         {content.trackTitle}
       </a>
       )}
-      <a
-        href={Astro.locals.store.href("/")}
-        class="btn-primary !h-[3.75rem] !text-[1rem] active:scale-95 shadow-xl shadow-[var(--clr-primary)]/20"
-      >
-        {content.backToStore}
-        <Icon name="heroicons:arrow-right" class:list={["w-5 h-5", isRTL ? 'rotate-180' : '']} />
-      </a>
     </div>
 </Section>
