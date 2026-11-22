@@ -405,13 +405,17 @@ export function initProductPage(): () => void {
   }
 
   /** Shows the selected variant: its buttons, price, stock and photo; the offer units that follow it. */
-  function updateVariant() {
+  function updateVariant(preserveServerPrice = false) {
     paintOptions(variantButtons, selection);
     const match = variantFor(variants, selection);
     if (!match) return;
 
-    currentPrice = match.price;
-    if (priceInput) priceInput.value = String(match.price);
+    // On first render, the server-derived commerce view is authoritative.
+    // In particular, a variant row may carry a zero price while the product
+    // view correctly falls back to the product's base price.
+    const selectedPrice = preserveServerPrice ? data.basePrice : match.price;
+    currentPrice = selectedPrice;
+    if (priceInput) priceInput.value = String(selectedPrice);
     if (variantIdInput) variantIdInput.value = match.id;
     if (variantLabelInput) {
       variantLabelInput.value = Object.values(match.variations).join(" / ");
@@ -736,7 +740,7 @@ export function initProductPage(): () => void {
   }
   // Run variant OOS check for the pre-selected default combination
   if (variants.length > 0) {
-    updateVariant();
+    updateVariant(true);
   } else {
     // Simple product — apply stock cap from product-level inventory
     mainOos = trackInventory && data.inventory <= 0;
