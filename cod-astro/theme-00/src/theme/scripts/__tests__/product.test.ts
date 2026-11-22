@@ -1247,6 +1247,18 @@ describe("Option buttons and the variant ordered", () => {
     expect(document.getElementById("price-display-desktop")!.textContent).toContain("2.800");
   });
 
+  it("keeps the product price when a shopper selects a zero-priced variant", () => {
+    const variants = shirt();
+    variants.forEach((variant) => { variant.price = 0; });
+    build({ variants });
+    initProductPage();
+
+    pill("Colour", "Blue").click();
+
+    expect((document.getElementById("price-input") as HTMLInputElement).value).toBe("2800");
+    expect(document.getElementById("price-display-desktop")!.textContent).toContain("2.800");
+  });
+
   it("opens on the default variant, its values the buttons shown, each value with its state", () => {
     build({ variants: shirt({ "black-m": { isDefault: true } }) });
     initProductPage();
