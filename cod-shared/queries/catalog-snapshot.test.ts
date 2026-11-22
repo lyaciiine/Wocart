@@ -57,6 +57,29 @@ const line = (productId: string, quantity: number, variantId: string | null = nu
 
 const placements = (snap: CatalogSnapshot, lines: CartLine[]) => priceCartLines(snap, lines).rewards.map((reward) => ({ offer: reward.offer.id, ...reward.placement }));
 
+describe("catalog line pricing", () => {
+  it("uses the product price when a selected variant has no configured price", () => {
+    const snap = snapshot(
+      [product("glasses", { price: 1990 })],
+      [variant("glasses-default", "glasses", { price: 0 })],
+      [],
+    );
+
+    expect(priceCartLines(snap, [line("glasses", 1, "glasses-default")]).priced[0]?.unitPrice).toBe(1990);
+    expect(priceCartLines(snap, [line("glasses", 1, "glasses-default")]).subtotal).toBe(1990);
+  });
+
+  it("keeps a configured non-zero variant price instead of the product price", () => {
+    const snap = snapshot(
+      [product("glasses", { price: 1990 })],
+      [variant("glasses-default", "glasses", { price: 2490 })],
+      [],
+    );
+
+    expect(priceCartLines(snap, [line("glasses", 1, "glasses-default")]).priced[0]?.unitPrice).toBe(2490);
+  });
+});
+
 describe("a reward's place", () => {
   it("is nowhere when the catalog has no such product, or no such variant: the offer does not apply", () => {
     expect(placements(snapshot([product("robe")], [], [gift("g")]), [line("robe", 1)])).toEqual([]);
