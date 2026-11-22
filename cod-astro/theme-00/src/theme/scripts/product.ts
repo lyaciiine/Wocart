@@ -410,11 +410,8 @@ export function initProductPage(): () => void {
     const match = variantFor(variants, selection);
     if (!match) return;
 
-    // A zero on a variant row means no per-variant price was configured;
-    // use the product's catalog price, matching the server's quote logic.
-    const selectedPrice = match.price > 0 ? match.price : data.basePrice;
-    currentPrice = selectedPrice;
-    if (priceInput) priceInput.value = String(selectedPrice);
+    currentPrice = match.price;
+    if (priceInput) priceInput.value = String(match.price);
     if (variantIdInput) variantIdInput.value = match.id;
     if (variantLabelInput) {
       variantLabelInput.value = Object.values(match.variations).join(" / ");

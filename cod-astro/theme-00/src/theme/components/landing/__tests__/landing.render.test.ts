@@ -117,6 +117,5 @@ describe("a landing page's own layout", () => {
     const html = await render(landing({ document: own([{ id: "name", type: "landing-product" }, { id: "order", type: "landing-order" }]) }));
     expect(html).toMatch(/<h1 class="landing-product-name"[^>]*>Robe kabyle<\/h1>/);
     expect(html).toContain("landing-product-stars");
-    expect(html).toContain('id="price-display-desktop"');
   });
 });

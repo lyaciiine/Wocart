@@ -385,10 +385,7 @@ function catalogPrices(snapshot: CatalogSnapshot, lines: CartLine[]): PricedLine
   return lines.map((line) => {
     const product = snapshot.products.get(line.productId);
     const variant = line.variantId ? snapshot.variants.get(line.variantId) : undefined;
-    // Variant rows created before per-variant pricing was configured can
-    // carry 0 while the product still has its catalog price. Match the
-    // storefront's server-rendered product view instead of quoting that as free.
-    const unitPrice = variant && variant.price > 0 ? variant.price : (product?.price ?? 0);
+    const unitPrice = variant ? variant.price : (product?.price ?? 0);
     return {
       line,
       unitPrice,

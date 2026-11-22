@@ -17,14 +17,12 @@ interface Props {
   /** What the store saved for the surface (`null` when nothing), or an editor's draft. */
   document: unknown;
   preview?: boolean;
-  /** Render only the announcement bar from the header area, without the header itself. */
-  onlyAnnouncement?: boolean;
   params?: Readonly<Record<string, string | undefined>>;
   /** The page's read cache, when the route already read what the sections need. */
   reads?: ReadCache;
 }
 
-const { theme, surface, document, preview = false, onlyAnnouncement = false, params = {} } = Astro.props;
+const { theme, surface, document, preview = false, params = {} } = Astro.props;
 const store = Astro.locals.store;
 const resolved = resolveSurfaceDocument(theme, surface, document, { content: store.content, locales: [store.locale, ...store.fallbackLocales] });
 reportSurface(surface, resolved);
@@ -32,6 +30,6 @@ const context = renderContext(store, params);
 const reads = Astro.props.reads ?? createReadCache();
 ---
 
-{resolved.page.sections.filter((section) => !onlyAnnouncement || section.type === "announcement-bar").map((section) => (
+{resolved.page.sections.map((section) => (
   <InstanceView instance={section} theme={theme} context={context} storefront={store.client} reads={reads} preview={preview} />
 ))}

@@ -9,14 +9,12 @@ import { shellCatalog } from "@/theme/catalog/families/shell";
 
 interface Props {
   area: "header" | "footer";
-  onlyAnnouncement?: boolean;
 }
 
-const onlyAnnouncement = Astro.props.onlyAnnouncement === true;
 const surface = areaSurface(Astro.props.area);
 const draft = Astro.locals.preview?.draft;
 const editing = draft?.surface === surface;
 const document = editing && draft?.document !== undefined ? draft.document : await Astro.locals.store.client.pageData.get(surface);
 ---
 
-<Sections theme={shellCatalog} surface={surface} document={document} preview={editing} onlyAnnouncement={onlyAnnouncement} />
+<Sections theme={shellCatalog} surface={surface} document={document} preview={editing} />

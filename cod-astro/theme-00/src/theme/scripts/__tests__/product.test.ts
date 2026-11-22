@@ -1209,7 +1209,6 @@ describe("Option buttons and the variant ordered", () => {
         data-offers='${JSON.stringify(o.offers ?? [])}'></div>
       ${o.tiers ?? pills("variant-opt")}
       <form method="POST">
-        <div id="price-display-desktop"></div>
         <input type="hidden" id="price-input" />
         <input type="hidden" id="variant-id-input" />
         <input type="hidden" id="variant-label-input" />
@@ -1235,28 +1234,6 @@ describe("Option buttons and the variant ordered", () => {
   afterEach(() => {
     container.remove();
     vi.unstubAllGlobals();
-  });
-
-  it("keeps the server-derived product price when the default variant row has a zero price", () => {
-    const variants = shirt();
-    variants[0]!.price = 0;
-    build({ variants });
-    initProductPage();
-
-    expect((document.getElementById("price-input") as HTMLInputElement).value).toBe("2800");
-    expect(document.getElementById("price-display-desktop")!.textContent).toContain("2.800");
-  });
-
-  it("keeps the product price when a shopper selects a zero-priced variant", () => {
-    const variants = shirt();
-    variants.forEach((variant) => { variant.price = 0; });
-    build({ variants });
-    initProductPage();
-
-    pill("Colour", "Blue").click();
-
-    expect((document.getElementById("price-input") as HTMLInputElement).value).toBe("2800");
-    expect(document.getElementById("price-display-desktop")!.textContent).toContain("2.800");
   });
 
   it("opens on the default variant, its values the buttons shown, each value with its state", () => {

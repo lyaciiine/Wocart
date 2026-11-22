@@ -23,7 +23,7 @@ const filled = stats ? Math.round(stats.avgRating) : 0;
     <div class="landing-product">
       <h1 class="landing-product-name">{product.name}</h1>
       <p class="landing-product-price">
-        <span class:list={["price", view.hasDiscount && "is-sale"]} id="price-display-desktop">{formatAmount(view.basePrice)}<span class="price-cur">{config.currencySymbol}</span></span>
+        <span class:list={["price", view.hasDiscount && "is-sale"]}>{formatAmount(view.basePrice)}<span class="price-cur">{config.currencySymbol}</span></span>
         {view.hasDiscount && view.comparePrice != null && <span class="price-was">{formatAmount(view.comparePrice)} {config.currencySymbol}</span>}
       </p>
       {stats && (
