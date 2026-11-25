@@ -15,7 +15,7 @@ import Sections from "@/theme/components/surface/Sections.astro";
 import { landingCatalog } from "@/theme/catalog/families/landing";
 import { theme00 } from "@/theme/theme";
 import { landingRead } from "@/theme/catalog/product/shared";
-import { imageSource } from "@/theme/utils/images";
+import { imageSource, imageSrcset } from "@/theme/utils/images";
 
 interface Props {
   landing: LandingPage;
@@ -52,7 +52,7 @@ const title = landing.metaTitle || (landing.product ? `${landing.product.name} â
   footer={shown("footer")}
   whatsapp={landing.product ? { kind: "product", product: landing.product.name } : undefined}
   hideMobileNav={true}
-  preloadImages={images.slice(0, 2).map((image) => imageSource(image.url, config.media, 1080))}
+  preloadImageSrcsets={images.slice(0, 2).map((image) => ({ href: imageSource(image.url, config.media, 1080), srcset: imageSrcset(image.url, config.media, [480, 720, 1080, 1440]), sizes: "(min-width: 768px) 720px, 100vw" }))}
 >
   <Sections theme={landingCatalog} surface={surface} document={page} preview={preview} params={{ slug: landing.slug, surface: "landing", preview: preview ? "true" : undefined }} reads={reads} />
   {!preview && <span hidden data-landing-visit={landing.slug}></span>}
