@@ -99,7 +99,7 @@ const subset = isRTL ? "arabic" : "latin";
        Only the first is high priority: preloading deep stack images would
        compete with the LCP for mobile bandwidth. -->
   {preloadImageSrcsets?.slice(0, 2).map((image, i) => (
-    <link rel="preload" as="image" href={image.href} imageSrcset={image.srcset} imageSizes={image.sizes} fetchpriority={i === 0 ? "high" : undefined} />
+    <link rel="preload" as="image" href={image.href} imagesrcset={image.srcset} imagesizes={image.sizes} fetchpriority={i === 0 ? "high" : undefined} />
   ))}
   {!preloadImageSrcsets && preloadImages?.slice(0, 2).map((src, i) => (
     <link rel="preload" as="image" href={src} fetchpriority={i === 0 ? "high" : undefined} />
