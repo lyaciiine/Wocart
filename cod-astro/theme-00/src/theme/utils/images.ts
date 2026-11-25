@@ -16,11 +16,11 @@ const QUALITY = 82;
 
 /** A photo at a width, in its own shape. */
 export const imageSource = (src: string, media: MediaDelivery, width: number): string =>
-  mediaImageUrl(src, { width, fit: "scale-down", format: "auto", quality: QUALITY }, media) ?? src;
+  mediaImageUrl(src, { width, fit: "scale-down", format: "webp", quality: QUALITY }, media) ?? src;
 
 /** The same photo at several widths, so a phone downloads a phone-sized file; undefined when it cannot be resized. */
 export const imageSrcset = (src: string, media: MediaDelivery, widths: readonly number[]): string | undefined =>
-  mediaImageSrcset(src, widths, { delivery: media, quality: QUALITY }) ?? undefined;
+  (mediaImageSrcset(src, widths, { delivery: media, quality: QUALITY })?.replace(/f-auto/g, "f-webp")) ?? undefined;
 
 /** A product's cart thumbnail. */
 export const thumbnailImage = (src: string, media: MediaDelivery): string => mediaImageUrl(src, THUMBNAIL, media) ?? src;
