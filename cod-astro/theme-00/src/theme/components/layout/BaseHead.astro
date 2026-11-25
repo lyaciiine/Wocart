@@ -41,9 +41,11 @@ interface Props {
   /** The page's LCP images (landing page stack top) — preloaded in <head>
    *  so their fetch starts before the parser reaches the <img> tags. */
   preloadImages?: string[];
+  /** Responsive LCP image preloads matching the image element candidates. */
+  preloadImageSrcsets?: { href: string; srcset?: string; sizes?: string }[];
 }
 
-const { title, description, ogImage, noindex, config, locale, canonical, alternates, schemes, themeColor, fonts, radii, isRTL, preloadImages, softNavigation = true } = Astro.props;
+const { title, description, ogImage, noindex, config, locale, canonical, alternates, schemes, themeColor, fonts, radii, isRTL, preloadImages, preloadImageSrcsets, softNavigation = true } = Astro.props;
 const subset = isRTL ? "arabic" : "latin";
 
 ---
@@ -96,7 +98,10 @@ const subset = isRTL ? "arabic" : "latin";
        head (fetchpriority on the img alone waits for the parser to reach it).
        Only the first is high priority: preloading deep stack images would
        compete with the LCP for mobile bandwidth. -->
-  {preloadImages?.slice(0, 2).map((src, i) => (
+  {preloadImageSrcsets?.slice(0, 2).map((image, i) => (
+    <link rel="preload" as="image" href={image.href} imageSrcset={image.srcset} imageSizes={image.sizes} fetchpriority={i === 0 ? "high" : undefined} />
+  ))}
+  {!preloadImageSrcsets && preloadImages?.slice(0, 2).map((src, i) => (
     <link rel="preload" as="image" href={src} fetchpriority={i === 0 ? "high" : undefined} />
   ))}
 
