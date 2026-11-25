@@ -52,7 +52,7 @@ const title = landing.metaTitle || (landing.product ? `${landing.product.name} â
   footer={shown("footer")}
   whatsapp={landing.product ? { kind: "product", product: landing.product.name } : undefined}
   hideMobileNav={true}
-  preloadImages={images.slice(0, 2).map((image) => image.url)}
+  preloadImages={images.slice(0, 2).map((image) => imageSource(image.url, config.media, 1080))}
 >
   <Sections theme={landingCatalog} surface={surface} document={page} preview={preview} params={{ slug: landing.slug, surface: "landing", preview: preview ? "true" : undefined }} reads={reads} />
   {!preview && <span hidden data-landing-visit={landing.slug}></span>}
